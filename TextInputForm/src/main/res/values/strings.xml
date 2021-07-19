@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt-BR">
+    <!-- errors -->
+    <string name="form_empty_error">%s não pode ser vazio.</string>
+    <string name="form_length_error">%1$s precisar conter %2$d digítos.</string>
+    <string name="form_min_length_error">%1$s não pode conter menos de %2$d digítos.</string>
+
+    <!-- allowed characters -->
+    <string name="letters_and_accentuation_allowed">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-</string>
+    <string name="letters_accentuation_and_numbers_allowed">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-1234567890</string>
+    <string name="characters_to_email_allowed">qwertyuiopasdfghjklçzxcvbnm QWERTYUIOPASDFGHJKLÇZXCVBNM 1234567890 _-@.</string>
+    <string name="only_letters_numbers_allowed">qwertyuiopasdfghjklçzxcvbnm QWERTYUIOPASDFGHJKLÇZXCVBNM 1234567890</string>
+    <string name="only_numbers_allowed">1234567890</string>
+</resources>
