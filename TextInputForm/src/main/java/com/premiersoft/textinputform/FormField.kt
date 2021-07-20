@@ -31,7 +31,7 @@ data class FormField(
             FieldType.EMAIL -> {
                 typeProperties = TypeProperties(
                     "E-mail", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS,
-                    layout.context.getString(R.string.only_numbers_allowed)
+                    layout.context.getString(R.string.characters_to_email_allowed)
                 )
             }
             FieldType.DATE -> {
@@ -40,7 +40,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "Data", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.characters_to_email_allowed),
+                    layout.context.getString(R.string.only_numbers_allowed),
                     listOf("#/#/####", "#/##/####", "##/##/####")
                 )
             }

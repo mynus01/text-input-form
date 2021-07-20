@@ -19,16 +19,16 @@ class MainActivity : AppCompatActivity() {
         val swtTerms = findViewById<SwitchMaterial>(R.id.swtTerms)
         val btnLogin = findViewById<Button>(R.id.buttonLogin)
 
-        val cpfField = FormField(lytCPF, FieldType.CNPJ)
-        val emailField = FormField(lytEmail, FieldType.EMAIL)
+        val cpfField = FormField(lytCPF, FieldType.CPF)
+        val emailField = FormField(lytEmail, FieldType.EMAIL, isRequired = false)
 
         val form =  TextInputForm(cpfField, emailField,
             viewToEnable = btnLogin,
-            isOptionalConditionSupplied = false
+            isExtraConditionValid = false
         )
 
         swtTerms.setOnCheckedChangeListener { _, value ->
-            form.isOptionalConditionSupplied = value
+            form.isExtraConditionValid = value
             form.validate()
         }
     }

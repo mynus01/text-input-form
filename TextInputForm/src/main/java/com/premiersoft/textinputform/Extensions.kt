@@ -110,7 +110,7 @@ fun CharSequence.isValidEmail(): Boolean {
 }
 
 fun CharSequence.isValidCPF(): Boolean {
-    if (this.isBlank()) return false
+    if (isBlank()) return false
 
     val numbers = arrayListOf<Int>()
 
@@ -138,6 +138,7 @@ fun CharSequence.isValidCPF(): Boolean {
 }
 
 fun CharSequence.isValidCNPJ(): Boolean {
+    if (isBlank()) return false
 
     val numbers = arrayListOf<Int>()
 

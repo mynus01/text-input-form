@@ -6,7 +6,7 @@ import androidx.core.widget.doOnTextChanged
 class TextInputForm(
     private vararg val fieldsList: FormField,
     private val viewToEnable: View,
-    var isOptionalConditionSupplied: Boolean = true
+    var isExtraConditionValid: Boolean = true
 ) {
     init {
         for ((index, field) in fieldsList.withIndex()) {
@@ -20,7 +20,7 @@ class TextInputForm(
     }
 
     fun validate() {
-        val result = fieldsList.none { !it.isOk } && isOptionalConditionSupplied
+        val result = fieldsList.none { !it.isOk } && isExtraConditionValid
         viewToEnable.isEnabled = result
     }
 
@@ -59,18 +59,21 @@ class TextInputForm(
             FieldType.CPF -> {
                 if (!field.getValue().isValidCPF()) {
                     field.layout.error = field.layout.context.getString(R.string.form_field_validation_error_o, field.typeProperties?.name)
+                    if (field.isRequired)
                     return false
                 }
             }
             FieldType.CNPJ -> {
                 if (text?.isValidCNPJ() != true) {
                     field.layout.error = field.layout.context.getString(R.string.form_field_validation_error_o, field.typeProperties?.name)
+                    if (field.isRequired)
                     return false
                 }
             }
             FieldType.EMAIL -> {
                 if (text?.isValidEmail() != true) {
                     field.layout.error = field.layout.context.getString(R.string.form_field_validation_error_o, field.typeProperties?.name)
+                    if (field.isRequired)
                     return false
                 }
             }
