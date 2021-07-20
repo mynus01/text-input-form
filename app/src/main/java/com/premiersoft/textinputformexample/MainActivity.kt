@@ -14,14 +14,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val lytEmail = findViewById<TextInputLayout>(R.id.textInputLayoutCPF)
-        val lytPassword = findViewById<TextInputLayout>(R.id.textInputLayoutEmail)
+        val lytCPF = findViewById<TextInputLayout>(R.id.textInputLayoutCPF)
+        val lytEmail = findViewById<TextInputLayout>(R.id.textInputLayoutEmail)
         val swtTerms = findViewById<SwitchMaterial>(R.id.swtTerms)
         val btnLogin = findViewById<Button>(R.id.buttonLogin)
 
-        val form =  TextInputForm(
-            FormField(lytEmail, FieldType.CPF),
-            FormField(lytPassword, isRequired = false),
+        val cpfField = FormField(lytCPF, FieldType.CNPJ)
+        val emailField = FormField(lytEmail, FieldType.EMAIL)
+
+        val form =  TextInputForm(cpfField, emailField,
             viewToEnable = btnLogin,
             isOptionalConditionSupplied = false
         )

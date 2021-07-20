@@ -11,16 +11,16 @@ class TextInputForm(
     init {
         for ((index, field) in fieldsList.withIndex()) {
             field.layout.editText?.doOnTextChanged { text, _, _, _ ->
-                fieldsList[index].isOk = validateFieldLength(index, text)
+                fieldsList[index].isOk = validateFieldLength(index, text) && validateTypeConditions(index, text)
                 validate()
             }
         }
+
         validate()
     }
 
     fun validate() {
         val result = fieldsList.none { !it.isOk } && isOptionalConditionSupplied
-
         viewToEnable.isEnabled = result
     }
 
@@ -29,7 +29,7 @@ class TextInputForm(
 
         if (field.isRequired) {
             if (text == null || text.isBlank()) {
-                field.layout.error = field.layout.context.getString(R.string.form_empty_error, field.typeProperties?.name)
+                field.layout.error = field.layout.context.getString(R.string.form_field_empty_error, field.typeProperties?.name)
                 field.layout.isErrorEnabled = true
                 return false
             }
@@ -37,16 +37,45 @@ class TextInputForm(
             field.minLength?.let { min ->
                 if (text.count() < min) {
                     if (field.maxLength != null && field.maxLength == min) {
-                        field.layout.error = field.layout.context.getString(R.string.form_length_error, field.typeProperties?.name, field.minLength)
+                        field.layout.error = field.layout.context.getString(R.string.form_field_length_error, field.typeProperties?.name, field.minLength)
                     } else {
-                        field.layout.error = field.layout.context.getString(R.string.form_min_length_error, field.typeProperties?.name, field.minLength)
+                        field.layout.error = field.layout.context.getString(R.string.form_field_min_length_error, field.typeProperties?.name, field.minLength)
                     }
                     field.layout.isErrorEnabled = true
                     return false
                 }
             }
         }
+
         field.layout.isErrorEnabled = false
+
+        return true
+    }
+
+    private fun validateTypeConditions(index: Int, text: CharSequence?): Boolean {
+        val field = fieldsList[index]
+
+        when (field.type) {
+            FieldType.CPF -> {
+                if (!field.getValue().isValidCPF()) {
+                    field.layout.error = field.layout.context.getString(R.string.form_field_validation_error_o, field.typeProperties?.name)
+                    return false
+                }
+            }
+            FieldType.CNPJ -> {
+                if (text?.isValidCNPJ() != true) {
+                    field.layout.error = field.layout.context.getString(R.string.form_field_validation_error_o, field.typeProperties?.name)
+                    return false
+                }
+            }
+            FieldType.EMAIL -> {
+                if (text?.isValidEmail() != true) {
+                    field.layout.error = field.layout.context.getString(R.string.form_field_validation_error_o, field.typeProperties?.name)
+                    return false
+                }
+            }
+            else -> return true
+        }
         return true
     }
 }

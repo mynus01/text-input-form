@@ -40,7 +40,8 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "Data", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.characters_to_email_allowed), mapOf(Pair(8, "#/#/####"), Pair(9, "#/##/####"), Pair(10, "##/##/####"))
+                    layout.context.getString(R.string.characters_to_email_allowed),
+                    listOf("#/#/####", "#/##/####", "##/##/####")
                 )
             }
             FieldType.CELLPHONE -> {
@@ -49,7 +50,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "Celular", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), mapOf(Pair(14, "(##) ####-####"), Pair(15, "(##) #####-####"))
+                    layout.context.getString(R.string.only_numbers_allowed), listOf("(##) ####-####", "(##) #####-####")
                 )
             }
             FieldType.PHONE -> {
@@ -58,7 +59,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "Telefone", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed),  mapOf(Pair(14, "(##) ####-####"))
+                    layout.context.getString(R.string.only_numbers_allowed), listOf("(##) ####-####")
                 )
             }
             FieldType.CPF -> {
@@ -67,7 +68,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "CPF", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), mapOf(Pair(14, "###.###.###-##"))
+                    layout.context.getString(R.string.only_numbers_allowed), listOf("###.###.###-##")
                 )
             }
             FieldType.CNPJ -> {
@@ -76,7 +77,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "CNPJ", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), mapOf(Pair(18, "##.###.###/####-##"))
+                    layout.context.getString(R.string.only_numbers_allowed), listOf("##.###.###/####-##")
                 )
             }
             FieldType.CUSTOM -> {
@@ -87,8 +88,9 @@ data class FormField(
         }
 
         typeProperties?.apply {
-            maskPatterns?.let { pattern ->
-                layout.editText?.mask(pattern, minLength!!, maskPlaceholder)
+            maskPatterns?.let { patterns ->
+                layout.editText?.mask(patterns, minLength!!, maskPlaceholder)
+                delimiters = getDelimiters(patterns, maskPlaceholder)
             }
             allowedChars?.let { chars ->
                 layout.editText?.keyListener = DigitsKeyListener.getInstance(chars)
@@ -107,5 +109,49 @@ data class FormField(
         if (!isRequired) {
             isOk = true
         }
+    }
+
+    private fun getDelimiters(patterns: List<String>, placeholder: Char): List<Char> {
+        val delimiters = mutableListOf<Char>()
+
+        for (p in patterns) {
+            for (c in p) {
+                if (c != placeholder && !delimiters.contains(c)) {
+                    delimiters.add(c)
+                }
+            }
+        }
+
+        return delimiters
+    }
+
+    /**
+     * removes the mask of the extracted text from the TextInputLayout
+     * and returns it;
+     *
+     * in case you want the text with the mask, see [getText];
+     *
+     * @returns the unmasked text.
+     */
+    fun getValue(): String {
+        val text = layout.editText?.text.toString()
+        val delimiters = typeProperties?.delimiters ?: emptyList()
+
+        for (c in delimiters) {
+            text.replace(c.toString(), "")
+        }
+
+        return text
+    }
+
+    /**
+     * gets the text from TextInputLayout and returns it;
+     *
+     * in case you want the unmasked text, see [getValue];
+     *
+     * @returns the raw text.
+     */
+    fun getText(): String {
+        return layout.editText?.text.toString()
     }
 }

@@ -7,7 +7,6 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutCPF"
         android:layout_width="0dp"
