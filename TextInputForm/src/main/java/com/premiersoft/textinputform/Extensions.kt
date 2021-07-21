@@ -7,20 +7,13 @@ import android.widget.EditText
 /**
  * @throws PatternException
  */
-fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char, delimiters: List<Char>? = null) {
-
-    val patternsMap = HashMap<Int, String>(patterns.size)
-    patterns.forEach { patternsMap[it.length] = it }
-
-    var currentLength = minLength
-    var currentPattern = patternsMap[currentLength] ?: throw PatternException("Invalid pattern")
+fun EditText.mask(pattern: String, maxLength: Int?, placeholder: Char, delimiters: List<Char>? = null) {
     var isBackspaceClicked = false
 
     fun generatePairs(): List<Pair<Int, Char>> {
         val pairs = ArrayList<Pair<Int, Char>>()
-        currentPattern = patternsMap[currentLength] ?: throw PatternException("Invalid pattern")
 
-        for ((i, c) in currentPattern.withIndex()) {
+        for ((i, c) in pattern.withIndex()) {
             if (c != placeholder) {
                 pairs.add(Pair(i, c))
             }
@@ -29,7 +22,7 @@ fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char, del
         return pairs
     }
 
-    var dividers = generatePairs()
+    val dividers = generatePairs()
 
     val textWatcher = object : TextWatcher {
 
@@ -53,11 +46,6 @@ fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char, del
 
                 var working = getEditText()
 
-                if (patternsMap.containsKey(working.length)) {
-                    currentLength = working.length
-                    dividers = generatePairs()
-                }
-
                 dividers.forEach {
                     working = manageDivider(working, it.first, it.second, start, before)
                 }
@@ -70,21 +58,24 @@ fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char, del
 
         private fun manageDivider(working: String, position: Int, dividerCharacter: Char, start: Int, before: Int): String {
             if (working.length == position) {
-                return if (before <= position && start < position)
+                return if (before <= position && start < position) {
                     working + dividerCharacter
-                else
+                } else {
                     working.dropLast(1)
+                }
+            } else if (working.length == position + 1) {
+                return dividerCharacter + working
             }
             return working
         }
 
         private fun getEditText(): String {
-            currentPattern.length.let { max ->
-                return if (text.length >= max)
-                    text.toString().substring(0, max)
-                else
-                    text.toString()
+            maxLength?.let { max ->
+                if (text.length >= max) {
+                    return text.toString().substring(0, max)
+                }
             }
+            return text.toString()
         }
 
         override fun afterTextChanged(s: Editable) {
@@ -93,13 +84,17 @@ fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char, del
                     lastChar?.let { last ->
                         if (it.contains(last)) {
                             s.delete(s.length - 1, s.length)
-                            setSelection(text.length)
 
                             while (s.length > 1 && it.contains(s[s.length - 1])) {
-                                s.delete(s.length, s.length)
+                                s.delete(s.length - 1, s.length)
                             }
+                            setSelection(text.length)
                         }
                     }
+                }
+                if (isBackspaceClicked && s.length == 1 && it.contains(s[0])) {
+                    s.delete(s.length - 1, s.length)
+                    setSelection(text.length)
                 }
             }
         }

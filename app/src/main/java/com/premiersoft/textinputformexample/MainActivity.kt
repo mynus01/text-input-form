@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val swtTerms = findViewById<SwitchMaterial>(R.id.swtTerms)
         val btnLogin = findViewById<Button>(R.id.buttonLogin)
 
-        val cpfField = FormField(lytCPF, FieldType.CPF)
+        val cpfField = FormField(lytCPF, FieldType.CELLPHONE)
         val emailField = FormField(lytEmail, FieldType.EMAIL, isRequired = false)
 
         val form = TextInputForm(

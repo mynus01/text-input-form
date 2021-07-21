@@ -40,17 +40,16 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "Data", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed),
-                    listOf("#/#/####", "#/##/####", "##/##/####")
+                    layout.context.getString(R.string.only_numbers_allowed), "##/##/####"
                 )
             }
             FieldType.CELLPHONE -> {
                 minLength = 14
-                maxLength = 15
+                maxLength = 16
 
                 typeProperties = TypeProperties(
                     "Celular", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), listOf("(##) ####-####", "(##) #####-####")
+                    layout.context.getString(R.string.only_numbers_allowed), "(##) #####--####"
                 )
             }
             FieldType.PHONE -> {
@@ -59,7 +58,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "Telefone", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), listOf("(##) ####-####")
+                    layout.context.getString(R.string.only_numbers_allowed), "(##) ####-####"
                 )
             }
             FieldType.CPF -> {
@@ -68,7 +67,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "CPF", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), listOf("###.###.###-##")
+                    layout.context.getString(R.string.only_numbers_allowed), "###.###.###-##"
                 )
             }
             FieldType.CNPJ -> {
@@ -77,7 +76,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "CNPJ", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), listOf("##.###.###/####-##")
+                    layout.context.getString(R.string.only_numbers_allowed), "##.###.###/####-##"
                 )
             }
             FieldType.CUSTOM -> {
@@ -88,9 +87,9 @@ data class FormField(
         }
 
         typeProperties?.apply {
-            maskPatterns?.let { patterns ->
-                delimiters = getDelimiters(patterns, maskPlaceholder)
-                layout.editText?.mask(patterns, minLength!!, maskPlaceholder, delimiters)
+            maskPattern?.let { pattern ->
+                delimiters = getDelimiters(listOf(pattern), maskPlaceholder)
+                layout.editText?.mask(pattern, maxLength, maskPlaceholder, delimiters)
             }
             allowedChars?.let { chars ->
                 layout.editText?.keyListener = DigitsKeyListener.getInstance(chars)
