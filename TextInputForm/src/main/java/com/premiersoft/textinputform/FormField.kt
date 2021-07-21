@@ -89,8 +89,8 @@ data class FormField(
 
         typeProperties?.apply {
             maskPatterns?.let { patterns ->
-                layout.editText?.mask(patterns, minLength!!, maskPlaceholder)
                 delimiters = getDelimiters(patterns, maskPlaceholder)
+                layout.editText?.mask(patterns, minLength!!, maskPlaceholder, delimiters)
             }
             allowedChars?.let { chars ->
                 layout.editText?.keyListener = DigitsKeyListener.getInstance(chars)
@@ -134,11 +134,11 @@ data class FormField(
      * @returns the unmasked text.
      */
     fun getValue(): String {
-        val text = layout.editText?.text.toString()
+        var text = layout.editText?.text.toString()
         val delimiters = typeProperties?.delimiters ?: emptyList()
 
         for (c in delimiters) {
-            text.replace(c.toString(), "")
+           text = text.replace(c.toString(), "")
         }
 
         return text

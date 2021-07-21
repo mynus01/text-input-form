@@ -3,6 +3,7 @@ package com.premiersoft.textinputformexample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
 import com.premiersoft.textinputform.TextInputForm
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         val cpfField = FormField(lytCPF, FieldType.CPF)
         val emailField = FormField(lytEmail, FieldType.EMAIL, isRequired = false)
 
-        val form =  TextInputForm(cpfField, emailField,
+        val form = TextInputForm(
+            cpfField, emailField,
             viewToEnable = btnLogin,
             isExtraConditionValid = false
         )
@@ -30,6 +32,12 @@ class MainActivity : AppCompatActivity() {
         swtTerms.setOnCheckedChangeListener { _, value ->
             form.isExtraConditionValid = value
             form.validate()
+        }
+
+        btnLogin.setOnClickListener {
+            Toast.makeText(this,
+                "Masked CPF: ${cpfField.getText()}\nUnmasked CPF: ${cpfField.getValue()}",
+                Toast.LENGTH_LONG).show()
         }
     }
 }

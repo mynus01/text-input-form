@@ -7,7 +7,7 @@ import android.widget.EditText
 /**
  * @throws PatternException
  */
-fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char) {
+fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char, delimiters: List<Char>? = null) {
 
     val patternsMap = HashMap<Int, String>(patterns.size)
     patterns.forEach { patternsMap[it.length] = it }
@@ -33,16 +33,21 @@ fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char) {
 
     val textWatcher = object : TextWatcher {
 
-        var edited = false
+        var isEdited = false
+        var lastChar: Char? = null
 
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             isBackspaceClicked = after < count
+
+            if (isBackspaceClicked) {
+                lastChar = s[s.length - 1]
+            }
         }
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             if (!isBackspaceClicked) {
-                if (edited) {
-                    edited = false
+                if (isEdited) {
+                    isEdited = false
                     return
                 }
 
@@ -57,7 +62,7 @@ fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char) {
                     working = manageDivider(working, it.first, it.second, start, before)
                 }
 
-                edited = true
+                isEdited = true
                 setText(working)
                 setSelection(text.length)
             }
@@ -82,26 +87,41 @@ fun EditText.mask(patterns: List<String>, minLength: Int, placeholder: Char) {
             }
         }
 
-        override fun afterTextChanged(s: Editable) {}
+        override fun afterTextChanged(s: Editable) {
+            delimiters?.let {
+                if (isBackspaceClicked && s.length > 1) {
+                    lastChar?.let { last ->
+                        if (it.contains(last)) {
+                            s.delete(s.length - 1, s.length)
+                            setSelection(text.length)
+
+                            while (s.length > 1 && it.contains(s[s.length - 1])) {
+                                s.delete(s.length, s.length)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     addTextChangedListener(textWatcher)
 }
 
 fun CharSequence.isValidEmail(): Boolean {
-    if (this.isBlank()) return false
+    if (isBlank()) return false
 
     if (!contains('.')) {
         return false
     } else {
-        var added = false
+        var isAtAdded = false
 
         for (c in this) {
             if (c == '@') {
-                if (added) {
+                if (isAtAdded) {
                     return false
                 } else {
-                    added = true
+                    isAtAdded = true
                 }
             }
         }
