@@ -49,7 +49,7 @@ data class FormField(
 
                 typeProperties = TypeProperties(
                     "Celular", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), "(##) #####--####"
+                    layout.context.getString(R.string.only_numbers_allowed), "(##) #####-####"
                 )
             }
             FieldType.PHONE -> {
