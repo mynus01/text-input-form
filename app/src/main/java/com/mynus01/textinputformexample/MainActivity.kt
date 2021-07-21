@@ -8,7 +8,8 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
 import com.mynus01.textinputform.TextInputForm
 import com.mynus01.textinputform.FieldType
-import com.mynus01.textinputform.FormField
+import com.mynus01.textinputform.model.FormField
+import com.mynus01.textinputform.util.showToast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val form = TextInputForm(
             cpfField, emailField,
-            viewToEnable = btnLogin,
-            isExtraConditionValid = false
+            viewToEnable = btnLogin
         )
 
         swtTerms.setOnCheckedChangeListener { _, value ->
@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            Toast.makeText(this,
-                "Masked CPF: ${cpfField.getText()}\nUnmasked CPF: ${cpfField.getValue()}",
-                Toast.LENGTH_LONG).show()
+           showToast("Masked CPF: ${cpfField.getText()}\nUnmasked CPF: ${cpfField.getValue()}")
         }
     }
 }

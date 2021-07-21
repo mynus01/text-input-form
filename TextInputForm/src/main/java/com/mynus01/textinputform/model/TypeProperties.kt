@@ -1,4 +1,4 @@
-package com.mynus01.textinputform
+package com.mynus01.textinputform.model
 
 data class TypeProperties(
     val name: String,

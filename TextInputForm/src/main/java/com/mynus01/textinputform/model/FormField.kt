@@ -1,9 +1,13 @@
-package com.mynus01.textinputform
+package com.mynus01.textinputform.model
 
 import android.text.InputFilter
 import android.text.InputType
-import android.text.method.DigitsKeyListener
 import com.google.android.material.textfield.TextInputLayout
+import com.mynus01.textinputform.FieldType
+import com.mynus01.textinputform.R
+import com.mynus01.textinputform.util.CustomDigitsKeyListener
+import com.mynus01.textinputform.util.mask
+
 
 data class FormField(
     val layout: TextInputLayout,
@@ -29,6 +33,9 @@ data class FormField(
                 )
             }
             FieldType.EMAIL -> {
+                minLength = 6
+                maxLength = 255
+
                 typeProperties = TypeProperties(
                     "E-mail", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS,
                     layout.context.getString(R.string.characters_to_email_allowed)
@@ -86,21 +93,21 @@ data class FormField(
             }
         }
 
-        typeProperties?.apply {
-            maskPattern?.let { pattern ->
-                delimiters = getDelimiters(listOf(pattern), maskPlaceholder)
-                layout.editText?.mask(pattern, maxLength, maskPlaceholder, delimiters)
+        layout.editText?.let { edit ->
+            typeProperties?.apply {
+                maskPattern?.let { pattern ->
+                    delimiters = getDelimiters(listOf(pattern), maskPlaceholder)
+                    edit.mask(pattern, maxLength, maskPlaceholder, delimiters)
+                }
+                allowedChars?.let { chars ->
+                    val keyListener = CustomDigitsKeyListener.getInstance(chars)
+                    inputType?.let { type ->
+                        keyListener.mInputType = type
+                    }
+                    edit.keyListener = keyListener
+                }
             }
-            allowedChars?.let { chars ->
-                layout.editText?.keyListener = DigitsKeyListener.getInstance(chars)
-            }
-            inputType?.let { type ->
-                layout.editText?.inputType = type
-            }
-        }
-
-        maxLength?.let { max ->
-            layout.editText?.let { edit ->
+            maxLength?.let { max ->
                 edit.filters += InputFilter.LengthFilter(max)
             }
         }
@@ -137,7 +144,7 @@ data class FormField(
         val delimiters = typeProperties?.delimiters ?: emptyList()
 
         for (c in delimiters) {
-           text = text.replace(c.toString(), "")
+            text = text.replace(c.toString(), "")
         }
 
         return text

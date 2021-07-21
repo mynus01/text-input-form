@@ -1,12 +1,14 @@
-package com.mynus01.textinputform
+package com.mynus01.textinputform.util
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 
-/**
- * @throws PatternException
- */
 fun EditText.mask(pattern: String, maxLength: Int?, placeholder: Char, delimiters: List<Char>? = null) {
     var isBackspaceClicked = false
 
@@ -111,8 +113,8 @@ fun CharSequence.isValidEmail(): Boolean {
     } else {
         var isAtAdded = false
 
-        for (c in this) {
-            if (c == '@') {
+        for ((i, c) in withIndex()) {
+            if (c == '@' && i > 0) {
                 if (isAtAdded) {
                     return false
                 } else {
@@ -120,8 +122,11 @@ fun CharSequence.isValidEmail(): Boolean {
                 }
             }
         }
+        if (isAtAdded) {
+            return true
+        }
     }
-    return true
+    return false
 }
 
 fun CharSequence.isValidCPF(): Boolean {
@@ -196,5 +201,15 @@ fun CharSequence.isValidCNPJ(): Boolean {
 
     return validateVerificationDigit(true, numbers) &&
             validateVerificationDigit(false, numbers)
+}
+
+fun Context.showToast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+}
+
+fun Context.copyToClipboard(text: CharSequence) {
+    val clipboard = ContextCompat.getSystemService(this, ClipboardManager::class.java)
+    val clip = ClipData.newPlainText("label", text)
+    clipboard?.setPrimaryClip(clip)
 }
 
