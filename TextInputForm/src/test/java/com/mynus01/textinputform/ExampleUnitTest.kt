@@ -1,4 +1,4 @@
-package com.premiersoft.textinputform
+package com.mynus01.textinputform
 
 import org.junit.Test
 

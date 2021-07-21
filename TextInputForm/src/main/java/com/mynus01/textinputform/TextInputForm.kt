@@ -1,4 +1,4 @@
-package com.premiersoft.textinputform
+package com.mynus01.textinputform
 
 import android.view.View
 import androidx.core.widget.doOnTextChanged

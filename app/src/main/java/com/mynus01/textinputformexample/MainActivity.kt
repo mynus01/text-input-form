@@ -1,4 +1,4 @@
-package com.premiersoft.textinputformexample
+package com.mynus01.textinputformexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
-import com.premiersoft.textinputform.TextInputForm
-import com.premiersoft.textinputform.FieldType
-import com.premiersoft.textinputform.FormField
+import com.mynus01.textinputform.TextInputForm
+import com.mynus01.textinputform.FieldType
+import com.mynus01.textinputform.FormField
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

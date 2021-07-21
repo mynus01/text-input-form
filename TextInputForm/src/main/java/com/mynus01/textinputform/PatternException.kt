@@ -1,3 +1,3 @@
-package com.premiersoft.textinputform
+package com.mynus01.textinputform
 
 class PatternException(message: String): Exception(message)

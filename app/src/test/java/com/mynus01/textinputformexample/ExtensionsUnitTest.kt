@@ -1,8 +1,8 @@
-package com.premiersoft.textinputformexample
+package com.mynus01.textinputformexample
 
-import com.premiersoft.textinputform.isValidCNPJ
-import com.premiersoft.textinputform.isValidCPF
-import com.premiersoft.textinputform.isValidEmail
+import com.mynus01.textinputform.isValidCNPJ
+import com.mynus01.textinputform.isValidCPF
+import com.mynus01.textinputform.isValidEmail
 import org.junit.Test
 
 import org.junit.Assert.*
