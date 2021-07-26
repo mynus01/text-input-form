@@ -3,11 +3,11 @@ package com.mynus01.textinputformexample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
 import com.mynus01.textinputform.TextInputForm
-import com.mynus01.textinputform.FieldType
+import com.mynus01.textinputform.enums.FieldType
+import com.mynus01.textinputform.enums.ValidationType
 import com.mynus01.textinputform.model.FormField
 import com.mynus01.textinputform.util.showToast
 
@@ -21,12 +21,16 @@ class MainActivity : AppCompatActivity() {
         val swtTerms = findViewById<SwitchMaterial>(R.id.swtTerms)
         val btnLogin = findViewById<Button>(R.id.buttonLogin)
 
-        val cpfField = FormField(lytCPF, FieldType.CPF)
-        val emailField = FormField(lytEmail, FieldType.EMAIL, isRequired = false)
+        val cpfField = FormField(lytCPF, FieldType.CNPJ)
+        val emailField = FormField(lytEmail, FieldType.EMAIL,
+            validationType = ValidationType.ONFOCUSCHANGED,
+            isRequired = false
+        )
 
         val form = TextInputForm(
             cpfField, emailField,
-            viewToEnable = btnLogin
+            viewToEnable = btnLogin,
+            isExtraConditionValid = false
         )
 
         swtTerms.setOnCheckedChangeListener { _, value ->
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-           showToast("Masked CPF: ${cpfField.getText()}\nUnmasked CPF: ${cpfField.getValue()}")
+            showToast("Masked CPF: ${cpfField.getText()}\nUnmasked CPF: ${cpfField.getValue()}")
         }
     }
 }

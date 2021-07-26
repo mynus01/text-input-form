@@ -3,8 +3,9 @@ package com.mynus01.textinputform.model
 import android.text.InputFilter
 import android.text.InputType
 import com.google.android.material.textfield.TextInputLayout
-import com.mynus01.textinputform.FieldType
+import com.mynus01.textinputform.enums.FieldType
 import com.mynus01.textinputform.R
+import com.mynus01.textinputform.enums.ValidationType
 import com.mynus01.textinputform.util.CustomDigitsKeyListener
 import com.mynus01.textinputform.util.mask
 
@@ -16,6 +17,7 @@ data class FormField(
     val isRequired: Boolean = true,
     var minLength: Int? = null,
     var maxLength: Int? = null,
+    var validationType: ValidationType = ValidationType.ONTEXTCHANGED,
     var isOk: Boolean = false
 ) {
     init {

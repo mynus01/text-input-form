@@ -1,11 +1,9 @@
 package com.mynus01.textinputform
 
-import android.os.Build
-import android.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.core.widget.doOnTextChanged
+import com.mynus01.textinputform.enums.FieldType
+import com.mynus01.textinputform.enums.ValidationType
 import com.mynus01.textinputform.model.FormField
 import com.mynus01.textinputform.util.*
 
@@ -14,22 +12,23 @@ class TextInputForm(
     private val viewToEnable: View,
     var isExtraConditionValid: Boolean = true
 ) {
-    private var selectionActionMode: ActionMode.Callback? = null
-    private var insertionActionMode: ActionMode.Callback? = null
-
     init {
         for ((index, field) in fieldsList.withIndex()) {
-            field.layout.editText?.doOnTextChanged { text, _, _, _ ->
-                selectionActionMode = createActionMode(field, true)
-                insertionActionMode = createActionMode(field, false)
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    field.layout.editText?.customInsertionActionModeCallback = insertionActionMode
-                    field.layout.editText?.customSelectionActionModeCallback = selectionActionMode
+            when(field.validationType) {
+                ValidationType.ONTEXTCHANGED -> {
+                    field.layout.editText?.doOnTextChanged { text, _, _, _ ->
+                        fieldsList[index].isOk = validateFieldLength(index, text) && validateTypeConditions(index, text)
+                        validate()
+                    }
                 }
-
-                fieldsList[index].isOk = validateFieldLength(index, text) && validateTypeConditions(index, text)
-                validate()
+                ValidationType.ONFOCUSCHANGED -> {
+                    field.layout.editText?.setOnFocusChangeListener { _, hasFocus ->
+                        if (!hasFocus) {
+                            fieldsList[index].isOk = validateFieldLength(index, field.getText()) && validateTypeConditions(index, field.getText())
+                            validate()
+                        }
+                    }
+                }
             }
         }
         validate()
@@ -97,35 +96,5 @@ class TextInputForm(
             else -> return true
         }
         return true
-    }
-
-    private fun createActionMode(field: FormField, isSelection: Boolean) = object : ActionMode.Callback {
-        override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-            val inflater = mode?.menuInflater
-            inflater?.inflate(R.menu.custom_selection_action_mode, menu)
-            return true
-        }
-
-        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false
-
-        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-            when (item?.itemId) {
-                android.R.id.cut -> {
-                    field.layout.context.copyToClipboard(field.getValue())
-                    field.layout.editText?.setText("")
-                    field.layout.context.showToast("Selection cut worked")
-                }
-                android.R.id.copy -> {
-                    field.layout.context.copyToClipboard(field.getValue())
-                    field.layout.context.showToast("Selection copy worked")
-                }
-            }
-            return true
-        }
-
-        override fun onDestroyActionMode(mode: ActionMode?) {
-
-            selectionActionMode = null
-        }
     }
 }
