@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 
+// TODO: replace this with the fun below
 fun EditText.mask(pattern: String, maxLength: Int?, placeholder: Char, delimiters: List<Char>? = null) {
     var isBackspaceClicked = false
 
@@ -99,6 +100,25 @@ fun EditText.mask(pattern: String, maxLength: Int?, placeholder: Char, delimiter
                     setSelection(text.length)
                 }
             }
+        }
+    }
+
+    addTextChangedListener(textWatcher)
+}
+
+// TODO
+fun EditText.mask(pattern: String, placeholder: Char = '#') {
+    val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            TODO("Not yet implemented")
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            TODO("Not yet implemented")
         }
     }
 
