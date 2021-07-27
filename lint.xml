@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- ignore -->
+    <issue id="AllowBackup" severity="ignore"/>
+    <issue id="ContentDescription" severity="ignore"/>
+    <issue id="RtlSymmetry" severity="ignore"/>
+
+    <!-- info -->
+    <issue id="MissingTranslation" severity="informational"/>
+    <issue id="SetTextI18n" severity="informational" />
+    <issue id="UselessParent" severity="informational"/>
+    <issue id="UnusedAttribute" severity="informational"/>
+
+    <!-- warn -->
+    <issue id="Deprecated" severity="warning"/>
+
+    <!-- error -->
+    <issue id="HardcodedText" severity="error"/>
+    <issue id="InvalidId" severity="error"/>
+    <issue id="MissingPermission" severity="error" />
+    <issue id="NestedWeights" severity="error" />
+    <issue id="StaticFieldLeak" severity="error"/>
+</lint>
