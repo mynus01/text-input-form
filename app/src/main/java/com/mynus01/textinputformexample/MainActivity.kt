@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.buttonLogin)
 
         val cpfField = FormField(lytCPF, FieldType.CPF)
+
         val emailField = FormField(lytEmail, FieldType.EMAIL,
             validationType = ValidationType.ON_FOCUS_CHANGED,
-            isRequired = false
         )
 
         val form = TextInputForm(

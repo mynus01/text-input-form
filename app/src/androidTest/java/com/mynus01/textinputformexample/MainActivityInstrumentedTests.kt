@@ -1,6 +1,7 @@
 package com.mynus01.textinputformexample
 
 import android.content.Context
+import android.view.KeyEvent
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -19,7 +20,9 @@ import org.junit.runner.RunWith
 class MainActivityInstrumentedTests {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
-    lateinit var instrumentationContext: Context
+    private lateinit var instrumentationContext: Context
+    private var cpfToBeTyped = "10020214995"
+    private var emailToBeTyped = "matheus.sandri@premiersoft.net"
 
     @Before
     fun setup() {
@@ -28,16 +31,21 @@ class MainActivityInstrumentedTests {
 
     @Test
     fun successScenario() {
-        val cpfToBeTyped = "10020214995"
         val cpfToBeOutput = "100.202.149-95"
-        val emailToBeTyped = "matheus.sandri@premiersoft.net"
 
         onView(withId(R.id.editTextCPF))
-            .perform(typeText(cpfToBeTyped), closeSoftKeyboard())
+            .perform(
+                typeText(cpfToBeTyped),
+                closeSoftKeyboard()
+            )
             .check(matches(withText(cpfToBeOutput)))
 
         onView(withId(R.id.editTextEmail))
-            .perform(typeText(emailToBeTyped), closeSoftKeyboard())
+            .perform(
+                typeText(emailToBeTyped),
+                closeSoftKeyboard(),
+                pressKey(KeyEvent.KEYCODE_TAB)
+            )
 
         onView(withId(R.id.swtTerms))
             .perform(click())
@@ -47,13 +55,16 @@ class MainActivityInstrumentedTests {
     }
 
     @Test
-    fun errorScenario() {
-        val cpfToBeTyped = "00000000000"
+    fun errorCPFScenario() {
+        cpfToBeTyped = "00000000000"
+
         val errorText = instrumentationContext.getString(R.string.form_field_validation_error_o, "CPF")
-        val emailToBeTyped = "matheus.sandri@premiersoft.net"
 
         onView(withId(R.id.editTextCPF))
-            .perform(typeText(cpfToBeTyped), closeSoftKeyboard())
+            .perform(
+                typeText(cpfToBeTyped),
+                closeSoftKeyboard()
+            )
 
         onView(withId(R.id.textInputLayoutCPF))
             .check { view, _ ->
@@ -62,7 +73,40 @@ class MainActivityInstrumentedTests {
             }
 
         onView(withId(R.id.editTextEmail))
-            .perform(typeText(emailToBeTyped), closeSoftKeyboard())
+            .perform(
+                typeText(emailToBeTyped),
+                closeSoftKeyboard()
+            )
+
+        onView(withId(R.id.swtTerms))
+            .perform(click())
+
+        onView(withId(R.id.buttonLogin))
+            .check(matches(isNotEnabled()))
+    }
+
+    @Test
+    fun errorEmailScenario() {
+        val errorText = instrumentationContext.getString(R.string.form_field_validation_error_o, "E-mail")
+        emailToBeTyped = "aaaaaaa"
+
+        onView(withId(R.id.editTextEmail))
+            .perform(
+                typeText(emailToBeTyped),
+                closeSoftKeyboard()
+            )
+
+        onView(withId(R.id.editTextCPF))
+            .perform(
+                typeText(cpfToBeTyped),
+                closeSoftKeyboard()
+            )
+
+        onView(withId(R.id.textInputLayoutEmail))
+            .check { view, _ ->
+                val actualError = (view as TextInputLayout).error
+                assertEquals(actualError, errorText)
+            }
 
         onView(withId(R.id.swtTerms))
             .perform(click())
