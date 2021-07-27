@@ -1,4 +1,4 @@
-package com.mynus01.textinputform
+package com.mynus01.textinputformexample
 
 import com.mynus01.textinputform.util.isValidCNPJ
 import com.mynus01.textinputform.util.isValidCPF
@@ -7,7 +7,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 
-class ExtensionsUnitTest {
+class ExtensionsUnitTests {
     @Test
     fun isEmailWithoutDotInvalid() {
         assertEquals("aaa@gmail".isValidEmail(), false)
