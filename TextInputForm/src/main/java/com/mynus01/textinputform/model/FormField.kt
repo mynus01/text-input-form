@@ -44,7 +44,7 @@ data class FormField(
                 )
             }
             FieldType.DATE -> {
-                minLength = 8
+                minLength = 10
                 maxLength = 10
 
                 typeProperties = TypeProperties(
@@ -99,7 +99,7 @@ data class FormField(
             typeProperties?.apply {
                 maskPattern?.let { pattern ->
                     delimiters = getDelimiters(listOf(pattern), maskPlaceholder)
-                    edit.mask(pattern, maxLength, maskPlaceholder, delimiters)
+                    edit.mask(pattern, maskPlaceholder, delimiters, maxLength)
                 }
                 allowedChars?.let { chars ->
                     val keyListener = CustomDigitsKeyListener.getInstance(chars)

@@ -43,14 +43,14 @@ class TextInputForm(
         val field = fieldsList[index]
 
         if (field.isRequired) {
-            if (text == null || text.isBlank()) {
+            if (text.isNullOrBlank()) {
                 field.layout.error = field.layout.context.getString(R.string.form_field_empty_error, field.typeProperties?.name)
                 field.layout.isErrorEnabled = true
                 return false
             }
 
             field.minLength?.let { min ->
-                if (text.count() < min) {
+                if (text.length < min) {
                     val minLength = field.typeProperties?.delimiters?.size?.let { min - it - 1 } ?: min
                     if (field.maxLength != null && field.maxLength == min) {
                         field.layout.error = field.layout.context.getString(R.string.form_field_length_error, field.typeProperties?.name, minLength)

@@ -33,7 +33,7 @@ class MainActivityInstrumentedTests {
         val emailToBeTyped = "matheus.sandri@premiersoft.net"
 
         onView(withId(R.id.editTextCPF))
-            .perform(typeText(cpfToBeTyped))
+            .perform(typeText(cpfToBeTyped), closeSoftKeyboard())
             .check(matches(withText(cpfToBeOutput)))
 
         onView(withId(R.id.editTextEmail))
@@ -53,7 +53,7 @@ class MainActivityInstrumentedTests {
         val emailToBeTyped = "matheus.sandri@premiersoft.net"
 
         onView(withId(R.id.editTextCPF))
-            .perform(typeText(cpfToBeTyped))
+            .perform(typeText(cpfToBeTyped), closeSoftKeyboard())
 
         onView(withId(R.id.textInputLayoutCPF))
             .check { view, _ ->

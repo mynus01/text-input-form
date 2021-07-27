@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val swtTerms = findViewById<SwitchMaterial>(R.id.swtTerms)
         val btnLogin = findViewById<Button>(R.id.buttonLogin)
 
-        val cpfField = FormField(lytCPF, FieldType.CNPJ)
+        val cpfField = FormField(lytCPF, FieldType.CPF)
         val emailField = FormField(lytEmail, FieldType.EMAIL,
             validationType = ValidationType.ONFOCUSCHANGED,
             isRequired = false

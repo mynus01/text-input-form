@@ -1,34 +1,30 @@
 package com.mynus01.textinputform.util
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import java.lang.StringBuilder
 
-// TODO: replace this with the fun below
-fun EditText.mask(pattern: String, maxLength: Int?, placeholder: Char, delimiters: List<Char>? = null) {
+fun EditText.mask(pattern: String, placeholder: Char = '#', delimiters: List<Char>? = null, maxLength: Int? = null) {
     var isBackspaceClicked = false
 
-    fun generatePairs(): List<Pair<Int, Char>> {
-        val pairs = ArrayList<Pair<Int, Char>>()
+    fun generateDividers(): Map<Int, Char> {
+        val dividerMap = mutableMapOf<Int, Char>()
 
         for ((i, c) in pattern.withIndex()) {
             if (c != placeholder) {
-                pairs.add(Pair(i, c))
+                dividerMap[i] = c
             }
         }
 
-        return pairs
+        return dividerMap
     }
 
-    val dividers = generatePairs()
+    val dividers = generateDividers()
 
     val textWatcher = object : TextWatcher {
-
         var isEdited = false
         var lastChar: Char? = null
 
@@ -40,48 +36,21 @@ fun EditText.mask(pattern: String, maxLength: Int?, placeholder: Char, delimiter
             }
         }
 
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            if (!isBackspaceClicked) {
-                if (isEdited) {
-                    isEdited = false
-                    return
-                }
-
-                var working = getEditText()
-
-                dividers.forEach {
-                    working = manageDivider(working, it.first, it.second, start, before)
-                }
-
-                isEdited = true
-                setText(working)
-                setSelection(text.length)
-            }
-        }
-
-        private fun manageDivider(working: String, position: Int, dividerCharacter: Char, start: Int, before: Int): String {
-            if (working.length == position) {
-                return if (before <= position && start < position) {
-                    working + dividerCharacter
-                } else {
-                    working.dropLast(1)
-                }
-            } else if (working.length == position + 1) {
-                return dividerCharacter + working
-            }
-            return working
-        }
-
-        private fun getEditText(): String {
-            maxLength?.let { max ->
-                if (text.length >= max) {
-                    return text.toString().substring(0, max)
-                }
-            }
-            return text.toString()
-        }
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 
         override fun afterTextChanged(s: Editable) {
+            if (isEdited) {
+                isEdited = false
+                return
+            }
+
+            maxLength?.let {
+                if (s.length > it) {
+                    isEdited = true
+                    setText(s.substring(0, it - 1))
+                }
+            }
+
             delimiters?.let {
                 if (isBackspaceClicked && s.length > 1) {
                     lastChar?.let { last ->
@@ -100,29 +69,38 @@ fun EditText.mask(pattern: String, maxLength: Int?, placeholder: Char, delimiter
                     setSelection(text.length)
                 }
             }
+
+            val st = StringBuilder().apply {
+                append(s.toString().toDigitsOnly())
+            }
+
+            addDividers(st)
+
+            if (isEdited) {
+                setText(st)
+                setSelection(text.length)
+            }
+        }
+
+        fun addDividers(st: StringBuilder) {
+            for ((i, c) in st.withIndex()) {
+                if (dividers.containsKey(i) && dividers[i] != c) {
+                    dividers[i]?.let {
+                        st.insert(i, it)
+                        isEdited = true
+                        addDividers(st)
+                        return
+                    }
+                }
+            }
         }
     }
 
     addTextChangedListener(textWatcher)
 }
 
-// TODO
-fun EditText.mask(pattern: String, placeholder: Char = '#') {
-    val textWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            TODO("Not yet implemented")
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-            TODO("Not yet implemented")
-        }
-    }
-
-    addTextChangedListener(textWatcher)
+fun String.toDigitsOnly(): String {
+    return replace("[^0-9]".toRegex(), "")
 }
 
 fun CharSequence.isValidEmail(): Boolean {
@@ -226,10 +204,3 @@ fun CharSequence.isValidCNPJ(): Boolean {
 fun Context.showToast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }
-
-fun Context.copyToClipboard(text: CharSequence) {
-    val clipboard = ContextCompat.getSystemService(this, ClipboardManager::class.java)
-    val clip = ClipData.newPlainText("label", text)
-    clipboard?.setPrimaryClip(clip)
-}
-
