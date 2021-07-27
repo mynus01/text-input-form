@@ -1,5 +1,5 @@
 package com.mynus01.textinputform.enums
 
 enum class ValidationType {
-    ONTEXTCHANGED, ONFOCUSCHANGED
+    ON_TEXT_CHANGED, ON_FOCUS_CHANGED
 }

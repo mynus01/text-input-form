@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val cpfField = FormField(lytCPF, FieldType.CPF)
         val emailField = FormField(lytEmail, FieldType.EMAIL,
-            validationType = ValidationType.ONFOCUSCHANGED,
+            validationType = ValidationType.ON_FOCUS_CHANGED,
             isRequired = false
         )
 

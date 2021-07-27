@@ -17,7 +17,7 @@ data class FormField(
     val isRequired: Boolean = true,
     var minLength: Int? = null,
     var maxLength: Int? = null,
-    var validationType: ValidationType = ValidationType.ONTEXTCHANGED,
+    var validationType: ValidationType = ValidationType.ON_TEXT_CHANGED,
     var isOk: Boolean = false
 ) {
     init {

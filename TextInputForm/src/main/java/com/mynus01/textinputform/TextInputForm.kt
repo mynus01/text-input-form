@@ -15,13 +15,13 @@ class TextInputForm(
     init {
         for ((index, field) in fieldsList.withIndex()) {
             when(field.validationType) {
-                ValidationType.ONTEXTCHANGED -> {
+                ValidationType.ON_TEXT_CHANGED -> {
                     field.layout.editText?.doOnTextChanged { text, _, _, _ ->
                         fieldsList[index].isOk = validateFieldLength(index, text) && validateTypeConditions(index, text)
                         validate()
                     }
                 }
-                ValidationType.ONFOCUSCHANGED -> {
+                ValidationType.ON_FOCUS_CHANGED -> {
                     field.layout.editText?.setOnFocusChangeListener { _, hasFocus ->
                         if (!hasFocus) {
                             fieldsList[index].isOk = validateFieldLength(index, field.getText()) && validateTypeConditions(index, field.getText())
