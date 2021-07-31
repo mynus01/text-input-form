@@ -11,9 +11,6 @@
     <issue id="UselessParent" severity="informational"/>
     <issue id="UnusedAttribute" severity="informational"/>
 
-    <!-- warn -->
-    <issue id="Deprecated" severity="warning"/>
-
     <!-- error -->
     <issue id="HardcodedText" severity="error"/>
     <issue id="InvalidId" severity="error"/>
