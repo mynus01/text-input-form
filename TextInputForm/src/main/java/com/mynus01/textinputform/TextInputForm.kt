@@ -11,7 +11,8 @@ import com.mynus01.textinputform.util.*
  * base class and constructor for a simple form with field type validations and automatically enabling/disabling a [View] (usually the submit button).
  *
  * @param fieldsList an array of [FormField]s which contains all the required and optional fields to be validated.
- * @param viewToEnable the view that will be enabled if all the validations for each [FormField]s in [fieldsList] were supplied.
+ * @param viewToEnable the view that will be enabled if all the validations for each [FormField]s in [fieldsList] were supplied,
+ * this parameter is null by default since you can have a form without a button or without the need of disabling enabling the button.
  * @param isExtraConditionValid an extra condition that needs to be fulfilled in order to [viewToEnable] be enabled,
  * use [validate] when updating this parameter.
  *
@@ -20,7 +21,7 @@ import com.mynus01.textinputform.util.*
  */
 class TextInputForm(
     private vararg val fieldsList: FormField,
-    private val viewToEnable: View,
+    private val viewToEnable: View? = null,
     var isExtraConditionValid: Boolean = true
 ) {
     init {
@@ -50,7 +51,7 @@ class TextInputForm(
     }
 
     /**
-     * enables or disables [viewToEnable] based on [FormField.isOk] parameter for each item on [fieldsList],
+     * enables or disables [viewToEnable] (if not null) based on [FormField.isOk] parameter for each item on [fieldsList],
      * in case they all are true and the optional conditional parameter [isExtraConditionValid] is true
      * enables [viewToEnable], otherwise disables it.
      *
@@ -60,7 +61,7 @@ class TextInputForm(
      * @since 0.0.1
      */
     fun validate() {
-        viewToEnable.isEnabled = fieldsList.none { !it.isOk } && isExtraConditionValid
+        viewToEnable?.isEnabled = fieldsList.none { !it.isOk } && isExtraConditionValid
     }
 
 
