@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt-BR">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en-US">
     <!-- errors -->
-    <string name="form_field_empty_error">%s não pode ser vazio.</string>
-    <string name="form_field_length_error">%1$s precisar conter %2$d digítos.</string>
-    <string name="form_field_min_length_error">%1$s não pode conter menos de %2$d digítos.</string>
-    <string name="form_field_validation_error_o">%1$s não é válido.</string>
-    <string name="form_field_validation_error_a">%1$s não é válida.</string>
+    <string name="form_field_empty_error">%s cannot be empty.</string>
+    <string name="form_field_length_error">%1$s needs to have %2$d digits.</string>
+    <string name="form_field_min_length_error">%1$s can\'t have less than %2$d digits.</string>
+    <string name="form_field_validation_error_o">%s is not valid.</string>
+    <string name="form_field_validation_error_a">%s is not valid.</string>
 
     <!-- allowed characters -->
-    <string name="letters_and_accentuation_allowed">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-</string>
-    <string name="letters_accentuation_and_numbers_allowed">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-1234567890</string>
-    <string name="characters_to_email_allowed">qwertyuiopasdfghjklçzxcvbnm QWERTYUIOPASDFGHJKLÇZXCVBNM 1234567890 _-@.</string>
-    <string name="only_letters_numbers_allowed">qwertyuiopasdfghjklçzxcvbnm QWERTYUIOPASDFGHJKLÇZXCVBNM 1234567890</string>
-    <string name="only_numbers_allowed">1234567890</string>
+    <string name="letters_and_accentuation_allowed" translatable="false">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-</string>
+    <string name="letters_accentuation_and_numbers_allowed" translatable="false">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-1234567890</string>
+    <string name="characters_to_email_allowed" translatable="false">qwertyuiopasdfghjklçzxcvbnm QWERTYUIOPASDFGHJKLÇZXCVBNM 1234567890 _-@.</string>
+    <string name="only_letters_numbers_allowed" translatable="false">qwertyuiopasdfghjklçzxcvbnm QWERTYUIOPASDFGHJKLÇZXCVBNM 1234567890</string>
+    <string name="only_numbers_allowed" translatable="false">1234567890</string>
 </resources>
