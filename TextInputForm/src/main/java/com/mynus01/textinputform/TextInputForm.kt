@@ -2,7 +2,6 @@ package com.mynus01.textinputform
 
 import android.view.View
 import androidx.core.widget.doOnTextChanged
-import com.google.android.material.textfield.TextInputLayout
 import com.mynus01.textinputform.enums.FieldType
 import com.mynus01.textinputform.enums.ValidationType
 import com.mynus01.textinputform.model.FormField
@@ -67,7 +66,7 @@ class TextInputForm(
 
     /**
      * checks if the text length of a given [FormField] is between [FormField.minLength] and [FormField.maxLength] parameters,
-     * sets to [FormField.layout] the [TextInputLayout.setErrorEnabled] attribute based on the result and a custom message if
+     * sets to [FormField.layout] the [com.google.android.material.textfield.TextInputLayout.setErrorEnabled] attribute based on the result and a custom message if
      * the error is enabled.
      *
      * @param index the index of the desired [FormField] in [fieldsList].
@@ -122,7 +121,7 @@ class TextInputForm(
 
     /**
      * checks if the text of a given [FormField] is fulfilling some [FormField.type] determined rules,
-     * and sets to [FormField.layout] the [TextInputLayout.setError] attribute based on the result with
+     * and sets to [FormField.layout] the [com.google.android.material.textfield.TextInputLayout.setError] attribute based on the result with
      * a custom message if the given rule wasn't fulfilled.
      *
      * @param index the index of the desired [FormField] in [fieldsList].
