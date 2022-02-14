@@ -9,7 +9,6 @@ import com.mynus01.textinputform.enums.ValidationType
 import com.mynus01.textinputform.util.CustomDigitsKeyListener
 import com.mynus01.textinputform.util.mask
 
-
 data class FormField(
     val layout: TextInputLayout,
     val type: FieldType = FieldType.CUSTOM,
@@ -21,76 +20,78 @@ data class FormField(
     var isOk: Boolean = false
 ) {
     init {
-        when (type) {
-            FieldType.TEXT -> {
-                typeProperties = TypeProperties(
-                    "Campo", InputType.TYPE_CLASS_TEXT,
-                    layout.context.getString(R.string.letters_accentuation_and_numbers_allowed)
-                )
-            }
-            FieldType.TEXT_ONLY -> {
-                typeProperties = TypeProperties(
-                    "Campo", InputType.TYPE_CLASS_TEXT,
-                    layout.context.getString(R.string.letters_and_accentuation_allowed)
-                )
-            }
-            FieldType.EMAIL -> {
-                minLength = 6
-                maxLength = 255
+        layout.context.apply {
+            when (type) {
+                FieldType.TEXT -> {
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_generic), InputType.TYPE_CLASS_TEXT,
+                        getString(R.string.letters_accentuation_and_numbers_allowed)
+                    )
+                }
+                FieldType.TEXT_ONLY -> {
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_generic), InputType.TYPE_CLASS_TEXT,
+                        getString(R.string.letters_and_accentuation_allowed)
+                    )
+                }
+                FieldType.EMAIL -> {
+                    minLength = 6
+                    maxLength = 255
 
-                typeProperties = TypeProperties(
-                    "E-mail", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS,
-                    layout.context.getString(R.string.characters_to_email_allowed)
-                )
-            }
-            FieldType.DATE -> {
-                minLength = 10
-                maxLength = 10
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_email), InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS,
+                        getString(R.string.characters_to_email_allowed)
+                    )
+                }
+                FieldType.DATE -> {
+                    minLength = 10
+                    maxLength = 10
 
-                typeProperties = TypeProperties(
-                    "Data", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), "##/##/####"
-                )
-            }
-            FieldType.CELLPHONE -> {
-                minLength = 14
-                maxLength = 16
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_date), InputType.TYPE_CLASS_NUMBER,
+                        getString(R.string.only_numbers_allowed), "##/##/####"
+                    )
+                }
+                FieldType.CELLPHONE -> {
+                    minLength = 14
+                    maxLength = 16
 
-                typeProperties = TypeProperties(
-                    "Celular", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), "(##) #####-####"
-                )
-            }
-            FieldType.PHONE -> {
-                minLength = 14
-                maxLength = 14
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_cellphone), InputType.TYPE_CLASS_NUMBER,
+                        getString(R.string.only_numbers_allowed), "(##) #####-####"
+                    )
+                }
+                FieldType.PHONE -> {
+                    minLength = 14
+                    maxLength = 14
 
-                typeProperties = TypeProperties(
-                    "Telefone", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), "(##) ####-####"
-                )
-            }
-            FieldType.CPF -> {
-                minLength = 14
-                maxLength = 14
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_telephone), InputType.TYPE_CLASS_NUMBER,
+                        getString(R.string.only_numbers_allowed), "(##) ####-####"
+                    )
+                }
+                FieldType.CPF -> {
+                    minLength = 14
+                    maxLength = 14
 
-                typeProperties = TypeProperties(
-                    "CPF", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), "###.###.###-##"
-                )
-            }
-            FieldType.CNPJ -> {
-                minLength = 18
-                maxLength = 18
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_cpf), InputType.TYPE_CLASS_NUMBER,
+                        getString(R.string.only_numbers_allowed), "###.###.###-##"
+                    )
+                }
+                FieldType.CNPJ -> {
+                    minLength = 18
+                    maxLength = 18
 
-                typeProperties = TypeProperties(
-                    "CNPJ", InputType.TYPE_CLASS_NUMBER,
-                    layout.context.getString(R.string.only_numbers_allowed), "##.###.###/####-##"
-                )
-            }
-            FieldType.CUSTOM -> {
-                if (typeProperties == null) {
-                    typeProperties = TypeProperties("Campo")
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_cpf), InputType.TYPE_CLASS_NUMBER,
+                        getString(R.string.only_numbers_allowed), "##.###.###/####-##"
+                    )
+                }
+                FieldType.CUSTOM -> {
+                    if (typeProperties == null) {
+                        typeProperties = TypeProperties(getString(R.string.form_field_name_generic))
+                    }
                 }
             }
         }

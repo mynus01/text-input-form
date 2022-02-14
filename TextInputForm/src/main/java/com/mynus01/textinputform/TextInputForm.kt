@@ -13,8 +13,8 @@ import com.mynus01.textinputform.util.*
  * @param fieldsList an array of [FormField]s which contains all the required and optional fields to be validated.
  * @param viewToEnable the view that will be enabled if all the validations for each [FormField]s in [fieldsList] were supplied,
  * this parameter is null by default since you can have a form without a button or without the need of disabling enabling the button.
- * @param isExtraConditionValid an extra condition that needs to be fulfilled in order to [viewToEnable] be enabled,
- * use [validate] when updating this parameter.
+ * @param isExtraConditionValid an extra condition that needs to be fulfilled in order to [viewToEnable] be enabled, when its value changes it
+ * calls [validate] to update the UI
  *
  *
  * @since 0.0.1
@@ -22,8 +22,14 @@ import com.mynus01.textinputform.util.*
 class TextInputForm(
     private vararg val fieldsList: FormField,
     private val viewToEnable: View? = null,
-    var isExtraConditionValid: Boolean = true
+    isExtraConditionValid: Boolean = true
 ) {
+    var isExtraConditionValid = isExtraConditionValid
+        set(value) {
+            field = value
+            validate()
+        }
+
     init {
         for ((index, field) in fieldsList.withIndex()) {
             when (field.validationType) {
@@ -60,7 +66,7 @@ class TextInputForm(
      *
      * @since 0.0.1
      */
-    fun validate() {
+    private fun validate() {
         viewToEnable?.isEnabled = fieldsList.none { !it.isOk } && isExtraConditionValid
     }
 

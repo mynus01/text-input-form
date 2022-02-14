@@ -7,6 +7,15 @@
     <string name="form_field_validation_error_o">%s is not valid.</string>
     <string name="form_field_validation_error_a">%s is not valid.</string>
 
+    <!-- field type names -->
+    <string name="form_field_name_generic">Field</string>
+    <string name="form_field_name_email">E-mail</string>
+    <string name="form_field_name_date">Date</string>
+    <string name="form_field_name_cellphone">Cellphone</string>
+    <string name="form_field_name_telephone">Telephone</string>
+    <string name="form_field_name_cpf">CPF</string>
+    <string name="form_field_name_cnpj">CNPJ</string>
+
     <!-- allowed characters -->
     <string name="letters_and_accentuation_allowed" translatable="false">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-</string>
     <string name="letters_accentuation_and_numbers_allowed" translatable="false">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-1234567890</string>

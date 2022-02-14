@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         swtTerms.setOnCheckedChangeListener { _, value ->
             form.isExtraConditionValid = value
-            form.validate()
         }
 
         btnLogin.setOnClickListener {

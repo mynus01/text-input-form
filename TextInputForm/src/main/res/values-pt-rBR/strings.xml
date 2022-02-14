@@ -6,4 +6,13 @@
     <string name="form_field_min_length_error">%1$s não pode conter menos de %2$d digítos.</string>
     <string name="form_field_validation_error_o">%s não é válido.</string>
     <string name="form_field_validation_error_a">%s não é válida.</string>
+
+    <!-- field type names -->
+    <string name="form_field_name_generic">Campo</string>
+    <string name="form_field_name_email">E-mail</string>
+    <string name="form_field_name_date">Data</string>
+    <string name="form_field_name_cellphone">Celular</string>
+    <string name="form_field_name_telephone">Telefone</string>
+    <string name="form_field_name_cpf">CPF</string>
+    <string name="form_field_name_cnpj">CNPJ</string>
 </resources>
