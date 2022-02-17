@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">TextInputFormExample</string>
+    <string name="app_name" translatable="false">TextInputFormExample</string>
+
+    <!-- Example activity-->
+    <string name="example_form_terms">Agree with the terms</string>
+    <string name="example_form_login" translatable="false">Login</string>
+    <string name="example_form_cpf" translatable="false">CPF</string>
+    <string name="example_form_email" translatable="false">E-mail</string>
 </resources>
