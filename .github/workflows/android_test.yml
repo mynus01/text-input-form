@@ -2,7 +2,11 @@ name: Android CI
 
 on:
   push:
-    branches: [ master, development, 'fix/*', 'feature/*' ]
+    branches: 
+      - master
+      - development
+      - 'feature/**'
+      - 'fix/**'
   pull_request:
     branches: [ master, development ]
 
