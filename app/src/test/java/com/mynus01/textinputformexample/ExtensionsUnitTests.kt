@@ -15,7 +15,7 @@ class ExtensionsUnitTests {
 
     @Test
     fun isEmailWithoutAtInvalid() {
-        assertEquals("aaa.gmail".isValidEmail(), true)
+        assertEquals("aaa.gmail".isValidEmail(), false)
     }
 
     @Test
