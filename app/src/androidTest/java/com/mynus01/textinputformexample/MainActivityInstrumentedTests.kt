@@ -82,7 +82,7 @@ class MainActivityInstrumentedTests {
             .perform(click())
 
         onView(withId(R.id.buttonLogin))
-            .check(matches(isEnabled()))
+            .check(matches(isNotEnabled()))
     }
 
     @Test
