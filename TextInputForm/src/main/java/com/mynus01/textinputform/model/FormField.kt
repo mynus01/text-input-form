@@ -9,7 +9,13 @@ import com.mynus01.textinputform.enums.ValidationType
 import com.mynus01.textinputform.util.CustomDigitsKeyListener
 import com.mynus01.textinputform.util.mask
 
-data class FormField(
+/**
+ * class used for manipulating and customizing a [TextInputLayout].
+ * // TODO
+ *
+ * @since 0.0.1
+ */
+class FormField(
     val layout: TextInputLayout,
     val type: FieldType = FieldType.CUSTOM,
     var typeProperties: TypeProperties? = null,
@@ -49,7 +55,7 @@ data class FormField(
 
                     typeProperties = TypeProperties(
                         getString(R.string.form_field_name_date), InputType.TYPE_CLASS_NUMBER,
-                        getString(R.string.only_numbers_allowed), "##/##/####"
+                        getString(R.string.only_numbers_allowed), getString(R.string.form_field_pattern_date)
                     )
                 }
                 FieldType.CELLPHONE -> {
@@ -58,7 +64,7 @@ data class FormField(
 
                     typeProperties = TypeProperties(
                         getString(R.string.form_field_name_cellphone), InputType.TYPE_CLASS_NUMBER,
-                        getString(R.string.only_numbers_allowed), "(##) #####-####"
+                        getString(R.string.only_numbers_allowed), getString(R.string.form_field_pattern_cellphone)
                     )
                 }
                 FieldType.PHONE -> {
@@ -67,7 +73,7 @@ data class FormField(
 
                     typeProperties = TypeProperties(
                         getString(R.string.form_field_name_telephone), InputType.TYPE_CLASS_NUMBER,
-                        getString(R.string.only_numbers_allowed), "(##) ####-####"
+                        getString(R.string.only_numbers_allowed), getString(R.string.form_field_pattern_telephone)
                     )
                 }
                 FieldType.CPF -> {
@@ -76,7 +82,7 @@ data class FormField(
 
                     typeProperties = TypeProperties(
                         getString(R.string.form_field_name_cpf), InputType.TYPE_CLASS_NUMBER,
-                        getString(R.string.only_numbers_allowed), "###.###.###-##"
+                        getString(R.string.only_numbers_allowed), getString(R.string.form_field_pattern_cpf)
                     )
                 }
                 FieldType.CNPJ -> {
@@ -85,7 +91,7 @@ data class FormField(
 
                     typeProperties = TypeProperties(
                         getString(R.string.form_field_name_cpf), InputType.TYPE_CLASS_NUMBER,
-                        getString(R.string.only_numbers_allowed), "##.###.###/####-##"
+                        getString(R.string.only_numbers_allowed), getString(R.string.form_field_pattern_cnpj)
                     )
                 }
                 FieldType.CUSTOM -> {
@@ -120,27 +126,16 @@ data class FormField(
         }
     }
 
-    private fun getDelimiters(patterns: List<String>, placeholder: Char): List<Char> {
-        val delimiters = mutableListOf<Char>()
-
-        for (p in patterns) {
-            for (c in p) {
-                if (c != placeholder && !delimiters.contains(c)) {
-                    delimiters.add(c)
-                }
-            }
-        }
-
-        return delimiters
-    }
-
     /**
-     * removes the mask of the extracted text from the TextInputLayout
-     * and returns it;
+     * removes the mask of the extracted text from the [TextInputLayout]
+     * and returns it.
      *
-     * in case you want the text with the mask, see [getText];
+     * in case you want the text with the mask, see [getText].
      *
-     * @returns the unmasked text.
+     * @return the unmasked text.
+     *
+     *
+     * @since 0.0.1
      */
     fun getValue(): String {
         var text = layout.editText?.text.toString()
@@ -154,13 +149,40 @@ data class FormField(
     }
 
     /**
-     * gets the text from TextInputLayout and returns it;
+     * gets the text from [TextInputLayout] and returns it.
      *
-     * in case you want the unmasked text, see [getValue];
+     * in case you want the unmasked text, see [getValue].
      *
-     * @returns the raw text.
+     * @return the raw text.
+     *
+     *
+     * @since 0.0.1
      */
     fun getText(): String {
         return layout.editText?.text.toString()
+    }
+
+    /**
+     * iterates on [patterns] and on each char of that string to see if it differs from [placeholder],
+     * if it does, adds to a list. after all iterations, sets this list as [TypeProperties.delimiters] of [typeProperties] object.
+     *
+     * @param patterns a list of patterns that will be used to mask a [FormField]
+     * @param placeholder the placeholder char used in [patterns]
+     *
+     *
+     * @since 0.0.1
+     */
+    private fun getDelimiters(patterns: List<String>, placeholder: Char): List<Char> {
+        val delimiters = mutableListOf<Char>()
+
+        for (p in patterns) {
+            for (c in p) {
+                if (c != placeholder && !delimiters.contains(c)) {
+                    delimiters.add(c)
+                }
+            }
+        }
+
+        return delimiters
     }
 }

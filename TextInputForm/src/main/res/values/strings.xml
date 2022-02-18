@@ -16,6 +16,13 @@
     <string name="form_field_name_cpf">CPF</string>
     <string name="form_field_name_cnpj">CNPJ</string>
 
+    <!-- field type patterns -->
+    <string name="form_field_pattern_date" translatable="false">##/##/####</string>
+    <string name="form_field_pattern_cellphone" translatable="false">(##) #####-####</string>
+    <string name="form_field_pattern_telephone" translatable="false">(##) ####-####</string>
+    <string name="form_field_pattern_cpf" translatable="false">###.###.###-##</string>
+    <string name="form_field_pattern_cnpj" translatable="false">##.###.###/####-##</string>
+
     <!-- allowed characters -->
     <string name="letters_and_accentuation_allowed" translatable="false">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-</string>
     <string name="letters_accentuation_and_numbers_allowed" translatable="false">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-1234567890</string>
