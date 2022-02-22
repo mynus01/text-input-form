@@ -11,7 +11,16 @@ import com.mynus01.textinputform.util.mask
 
 /**
  * class used for manipulating and customizing a [TextInputLayout].
- * // TODO
+ *
+ * @param layout the [TextInputLayout] for the rules to be applied.
+ * @param type a [FieldType] for applying rules on [layout].
+ * @param typeProperties a custom set of rules in case you have selected [type] as [FieldType.CUSTOM] (otherwise your rules will be ignored).
+ * @param isRequired true if this field is required, false otherwise.
+ * @param minLength a rule for this field that determines a minimum length (in case it's the same as [maxLength] the error messages will change).
+ * @param maxLength a rule for this field that determines a maximum length (in case it's the same as [minLength] the error messages will change).
+ * @param validationType the type of validation this field will have.
+ * @param isOk an auto generated parameter that says this field is fulfilling all the given rules.
+ *
  *
  * @since 0.0.1
  */
