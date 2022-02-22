@@ -175,8 +175,10 @@ class FormField(
      * iterates on [patterns] and on each char of that string to see if it differs from [placeholder],
      * if it does, adds to a list. after all iterations, sets this list as [TypeProperties.delimiters] of [typeProperties] object.
      *
-     * @param patterns a list of patterns that will be used to mask a [FormField]
-     * @param placeholder the placeholder char used in [patterns]
+     * @param patterns a list of patterns that will be used to mask a [FormField].
+     * @param placeholder the placeholder char used in [patterns].
+     *
+     * @return a list containing all the non-placeholder chars.
      *
      *
      * @since 0.0.1
