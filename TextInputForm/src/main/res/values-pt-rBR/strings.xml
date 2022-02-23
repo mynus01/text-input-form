@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt-BR">
     <!-- errors -->
     <string name="form_field_empty_error">%s não pode ser vazio.</string>
-    <string name="form_field_length_error">%1$s precisar conter %2$i digítos.</string>
-    <string name="form_field_min_length_error">%1$s não pode conter menos de %2$i digítos.</string>
+    <string name="form_field_length_error">%1$s precisar conter %2$s digítos.</string>
+    <string name="form_field_min_length_error">%1$s não pode conter menos de %2$s digítos.</string>
     <string name="form_field_validation_error_o">%s não é válido.</string>
     <string name="form_field_validation_error_a">%s não é válida.</string>
 

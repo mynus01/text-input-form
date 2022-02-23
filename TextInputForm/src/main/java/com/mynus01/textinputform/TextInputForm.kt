@@ -106,13 +106,13 @@ class TextInputForm(
                         field.layout.error = field.layout.context.getString(
                             R.string.form_field_length_error,
                             field.typeProperties?.name,
-                            minLength
+                            minLength.toString()
                         )
                     } else {
                         field.layout.error = field.layout.context.getString(
                             R.string.form_field_min_length_error,
                             field.typeProperties?.name,
-                            minLength
+                            minLength.toString()
                         )
                     }
                     field.layout.isErrorEnabled = true
