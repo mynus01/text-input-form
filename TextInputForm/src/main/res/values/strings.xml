@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en-US">
     <!-- errors -->
     <string name="form_field_empty_error">%s cannot be empty.</string>
-    <string name="form_field_length_error">%1$s needs to have %2$d digits.</string>
-    <string name="form_field_min_length_error">%1$s can\'t have less than %2$d digits.</string>
+    <string name="form_field_length_error">%s needs to have %d digits.</string>
+    <string name="form_field_min_length_error">%s can\'t have less than %d digits.</string>
     <string name="form_field_validation_error_o">%s is not valid.</string>
     <string name="form_field_validation_error_a">%s is not valid.</string>
 

@@ -138,7 +138,7 @@ fun CharSequence.isValidCPF(): Boolean {
 
     if (numbers.size != 11) return false
 
-    (0..9).forEach { n ->
+    for (n in (0..9)) {
         val digits = arrayListOf<Int>()
         repeat((0..10).count()) { digits.add(n) }
         if (numbers == digits) return false
@@ -166,7 +166,7 @@ fun CharSequence.isValidCNPJ(): Boolean {
 
     if (numbers.size != 14) return false
 
-    (0..9).forEach { n ->
+     for (n in (0..9)) {
         val digits = arrayListOf<Int>()
         repeat((0..13).count()) { digits.add(n) }
         if (numbers == digits) return false
