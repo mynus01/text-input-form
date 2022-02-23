@@ -18,7 +18,7 @@ allprojects {
 In your gradle.build (app) add the implementation inside the dependencies tag:
 ```groovy
 dependencies {
-    implementation 'com.github.mynus01:text-input-form:0.0.1'
+    implementation 'com.github.mynus01:text-input-form:0.1.1'
 }
 ```
 
