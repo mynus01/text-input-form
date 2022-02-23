@@ -10,5 +10,5 @@ package com.mynus01.textinputform.enums
  * @since 0.0.1
  */
 enum class FieldType {
-    TEXT, TEXT_ONLY, EMAIL, DATE, CELLPHONE, PHONE, CPF, CNPJ, CUSTOM
+    TEXT, TEXT_ONLY, EMAIL, DATE, CELLPHONE, PHONE, CPF, CNPJ, CEP, CUSTOM
 }

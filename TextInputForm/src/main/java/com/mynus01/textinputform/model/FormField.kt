@@ -99,8 +99,17 @@ class FormField(
                     maxLength = 18
 
                     typeProperties = TypeProperties(
-                        getString(R.string.form_field_name_cpf), InputType.TYPE_CLASS_NUMBER,
+                        getString(R.string.form_field_name_cnpj), InputType.TYPE_CLASS_NUMBER,
                         getString(R.string.only_numbers_allowed), getString(R.string.form_field_pattern_cnpj)
+                    )
+                }
+                FieldType.CEP -> {
+                    minLength = 9
+                    maxLength = 9
+
+                    typeProperties = TypeProperties(
+                        getString(R.string.form_field_name_cep), InputType.TYPE_CLASS_NUMBER,
+                        getString(R.string.only_numbers_allowed), getString(R.string.form_field_pattern_cep)
                     )
                 }
                 FieldType.CUSTOM -> {

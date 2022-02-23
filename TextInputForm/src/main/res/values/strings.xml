@@ -15,6 +15,7 @@
     <string name="form_field_name_telephone">Telephone</string>
     <string name="form_field_name_cpf">CPF</string>
     <string name="form_field_name_cnpj">CNPJ</string>
+    <string name="form_field_name_cep">CEP</string>
 
     <!-- field type patterns -->
     <string name="form_field_pattern_date" translatable="false">##/##/####</string>
@@ -22,6 +23,7 @@
     <string name="form_field_pattern_telephone" translatable="false">(##) ####-####</string>
     <string name="form_field_pattern_cpf" translatable="false">###.###.###-##</string>
     <string name="form_field_pattern_cnpj" translatable="false">##.###.###/####-##</string>
+    <string name="form_field_pattern_cep" translatable="false">#####-###</string>
 
     <!-- allowed characters -->
     <string name="letters_and_accentuation_allowed" translatable="false">qweéêërtyuúûüiíìîïoõóöpaãáàâsdfghjklçzxcvbnm QWEÉÊËRTYUÚÛÜIÍÌÎÏOÓÕÔÖPAÁÀÃÂSDFGHJKLÇZXCVBNM-</string>

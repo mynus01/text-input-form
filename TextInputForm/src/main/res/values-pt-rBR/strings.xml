@@ -15,4 +15,5 @@
     <string name="form_field_name_telephone">Telefone</string>
     <string name="form_field_name_cpf">CPF</string>
     <string name="form_field_name_cnpj">CNPJ</string>
+    <string name="form_field_name_cep">CEP</string>
 </resources>
