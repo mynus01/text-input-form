@@ -22,3 +22,6 @@ jobs:
       
     - name: Build with Gradle
       run: ./gradlew build
+      
+    - name: Run Cucumber tests
+      run: gradle test -Dcucumber
