@@ -1,4 +1,5 @@
 Feature: Validate FieldTypes
+  @formfield @fieldtype
 
   Scenario Outline: Check if all FieldType rules are working as expected
     Given FieldType is <type>
