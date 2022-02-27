@@ -8,7 +8,7 @@ Feature: Validate FieldTypes
     Examples:
       | type    | value                | expected |
       | "CPF"   | "111.111.111-11"     | "false"  |
-      | "CPF"   | "123.456.789-01"     | "false"  |
+      | "CPF"   | "123.456.789-01"     | "true"  |
       | "CPF"   | "100.202.149-95"     | "true"   |
 
       | "CNPJ"  | "11.111.111/1111-11" | "false"  |
