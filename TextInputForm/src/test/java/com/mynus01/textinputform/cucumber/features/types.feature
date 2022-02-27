@@ -1,6 +1,5 @@
 Feature: Validate FieldTypes
 
-  
   Scenario Outline: Check if all FieldType rules are working as expected
     Given FieldType is <type>
     When <value> is inserted

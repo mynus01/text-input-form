@@ -19,7 +19,7 @@ class FieldTypeSteps {
     }
 
     @When("{string} is inserted")
-    fun value_is_inserted(value: String) {
+    fun is_inserted(value: String) {
         result = when(fieldType) {
             FieldType.CPF -> value.isValidCPF()
             FieldType.CNPJ -> value.isValidCNPJ()
