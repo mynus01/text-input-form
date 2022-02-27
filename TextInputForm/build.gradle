@@ -14,9 +14,9 @@ android {
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 2
-        versionName "0.2.0"
+        versionName "0.1.1"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.mynus01.textinputform.cucumber.RunnerCucumberTest"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'io.cucumber:cucumber-android:4.9.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
